@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { Server } from "socket.io";
 
 const uri = process.env.MONGO_URI;
 
@@ -26,6 +27,31 @@ if (uri) {
     globalWithMongo._mongoClientPromise = client.connect();
   }
   clientPromise = globalWithMongo._mongoClientPromise!;
+}
+
+let io: Server | null = null;
+
+export function initializeWebSocket(server: any) {
+  io = new Server(server, {
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST"],
+    },
+  });
+
+  io.on("connection", (socket) => {
+    console.log("A user connected: " + socket.id);
+
+    socket.on("disconnect", () => {
+      console.log("A user disconnected: " + socket.id);
+    });
+  });
+}
+
+export function emitUpdate(event: string, data: any) {
+  if (io) {
+    io.emit(event, data);
+  }
 }
 
 export default clientPromise;
