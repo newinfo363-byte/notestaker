@@ -1,8 +1,10 @@
 import { MongoClient } from "mongodb";
 
-// Fallback to the provided URI if env var is missing
-const DEFAULT_URI = "mongodb+srv://admin:J389RVSQR0t6Tpym@cluster0.blnyfyn.mongodb.net/notesflow?appName=Cluster0";
-const uri = (typeof process !== 'undefined' && process.env.MONGO_URI) || DEFAULT_URI;
+const uri = process.env.MONGO_URI;
+
+if (!uri) {
+  throw new Error("MONGO_URI environment variable is not defined");
+}
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
