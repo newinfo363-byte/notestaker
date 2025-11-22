@@ -28,7 +28,4 @@ if (!globalWithMongo._mongoClientPromise) {
 }
 clientPromise = globalWithMongo._mongoClientPromise!;
 
-// Exporting as default only if we are in a node environment to avoid crashing the client demo
-const isNode = typeof process !== 'undefined' && (process as any).versions != null && (process as any).versions.node != null;
-
-export default isNode ? clientPromise : null;
+export default clientPromise;
