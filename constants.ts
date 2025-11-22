@@ -1,9 +1,10 @@
-
 export const ADMIN_PASSWORD = "harshith@80888";
 
-// SET THIS TO TRUE TO USE MONGODB (Requires Vercel Deployment or Next.js Server)
-// Currently false so you can test the upload UI immediately in this preview
-export const USE_API = true;
+// Toggle between MongoDB API mode and localStorage mode via Vite env (VITE_USE_API)
+// Defaults to false so the app always works even if backend / MongoDB is not configured.
+export const USE_API = typeof import.meta !== 'undefined'
+  ? import.meta.env.VITE_USE_API === 'true'
+  : false;
 
 export const MOCK_DELAY = 500; // Simulate network latency
 

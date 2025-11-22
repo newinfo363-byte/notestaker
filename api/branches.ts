@@ -1,6 +1,10 @@
 import clientPromise from '../lib/mongodb';
 
 export default async function handler(req: any, res: any) {
+  if (!clientPromise) {
+    return res.status(500).json({ error: 'Database is not configured (MONGO_URI missing)' });
+  }
+
   const client = await clientPromise;
   if (!client) return res.status(500).json({ error: 'Database not connected' });
   
