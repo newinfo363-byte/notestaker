@@ -19,21 +19,6 @@ const NoteCard = ({ note }: { note: Note }) => {
     'text': <Type className="w-6 h-6 text-gray-500" />
   }[note.type];
 
-  const handleView = () => {
-    if (note.type === 'text' || !note.url) return; // Text is shown inline, do nothing.
-    window.open(note.url, '_blank', 'noopener,noreferrer');
-  };
-
-  const handleDownload = () => {
-    if (!note.url) return;
-    const link = document.createElement('a');
-    link.href = note.url;
-    link.download = note.title || 'download';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow flex flex-col gap-3">
       <div className="flex items-start gap-3">
@@ -49,11 +34,11 @@ const NoteCard = ({ note }: { note: Note }) => {
       )}
 
       <div className="flex gap-2 mt-auto pt-2">
-        <button onClick={handleView} className="flex-1 bg-primary text-white text-sm py-2 rounded flex items-center justify-center gap-2 hover:bg-teal-800 disabled:opacity-50" disabled={note.type === 'text'}>
+        <button className="flex-1 bg-primary text-white text-sm py-2 rounded flex items-center justify-center gap-2 hover:bg-teal-800">
            <ExternalLink className="w-4 h-4" /> View
         </button>
-        {note.type === 'pdf' && note.url && (
-          <button onClick={handleDownload} className="px-3 border border-gray-300 rounded hover:bg-gray-50">
+        {note.type === 'pdf' && (
+          <button className="px-3 border border-gray-300 rounded hover:bg-gray-50">
             <Download className="w-4 h-4 text-gray-600" />
           </button>
         )}
