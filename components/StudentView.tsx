@@ -143,7 +143,7 @@ export const StudentView: React.FC<StudentViewProps> = ({ onExit }) => {
               <Menu className="w-6 h-6" />
             </button>
             <div className="font-bold text-xl text-primary flex items-center gap-2">
-              <span className="bg-primary text-white p-1 rounded">NF</span> NotesFlow
+              <span className="bg-primary text-white p-1 rounded">JC</span> JCNOTES
             </div>
           </div>
           
@@ -238,7 +238,7 @@ export const StudentView: React.FC<StudentViewProps> = ({ onExit }) => {
               <div className="bg-green-100 p-6 rounded-full">
                 <Home className="w-12 h-12 text-primary opacity-50" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-700">Welcome to NotesFlow</h2>
+              <h2 className="text-2xl font-bold text-gray-700">Welcome to JCNOTES</h2>
               <p className="max-w-md">Select your Branch, Section, and Subject from the menu to start browsing notes, videos, and resources.</p>
             </div>
           ) : (
