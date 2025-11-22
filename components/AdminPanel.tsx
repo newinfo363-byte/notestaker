@@ -4,7 +4,7 @@ import { Branch, Section, Subject, Unit, Topic, Note, NoteType } from '../types'
 import { dataService } from '../services/dataService';
 import { 
   LayoutDashboard, LogOut, FolderTree, ChevronRight, Plus, Trash2, 
-  Edit, FileText, Image, Video, Type, Save, X, UploadCloud, Loader2, Link as LinkIcon
+  FileText, Image, Video, Type, Save, X, UploadCloud, Loader2, Link as LinkIcon
 } from 'lucide-react';
 import { io } from "socket.io-client";
 
@@ -38,7 +38,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
   const [notes, setNotes] = useState<Note[]>([]);
 
   // UI State
-  const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [newItemName, setNewItemName] = useState('');
   const [newItemDesc, setNewItemDesc] = useState('');
@@ -66,10 +65,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
 
   // --- Fetchers ---
   const fetchBranches = async () => {
-    setIsLoading(true);
     const data = await dataService.getBranches();
     setBranches(data);
-    setIsLoading(false);
   };
 
   useEffect(() => {
