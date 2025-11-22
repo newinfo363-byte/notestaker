@@ -1,0 +1,5 @@
+{
+  "name": "NotesFlow - Academic Resource Manager",
+  "description": "A comprehensive, hierarchical note management system for educational institutions. Features a secure admin panel for content management and a simplified, login-free student viewer.",
+  "requestFramePermissions": []
+}
