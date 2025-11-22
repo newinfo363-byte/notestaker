@@ -5,6 +5,7 @@ import {
   Search, ChevronRight, ChevronDown, FileText, Image, 
   Video, Type, Home, Menu, X, Download, ExternalLink 
 } from 'lucide-react';
+import { io } from "socket.io-client";
 
 interface StudentViewProps {
   onExit: () => void;
@@ -67,6 +68,9 @@ export const StudentView: React.FC<StudentViewProps> = ({ onExit }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedUnits, setExpandedUnits] = useState<Set<string>>(new Set());
+
+  // WebSocket
+  const socket = io("http://localhost:3000");
 
   // --- Initialization ---
   useEffect(() => {
@@ -131,6 +135,23 @@ export const StudentView: React.FC<StudentViewProps> = ({ onExit }) => {
     const matchesTopic = unitTopics.some(t => t.title.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesUnit || matchesTopic;
   });
+
+  // WebSocket Effects
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Connected to WebSocket server");
+    });
+
+    socket.on("update", (data) => {
+      console.log("Received update:", data);
+      // Handle the update, e.g., refresh data
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("update");
+    };
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">

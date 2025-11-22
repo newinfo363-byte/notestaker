@@ -6,6 +6,9 @@ import {
   LayoutDashboard, LogOut, FolderTree, ChevronRight, Plus, Trash2, 
   Edit, FileText, Image, Video, Type, Save, X, UploadCloud, Loader2, Link as LinkIcon
 } from 'lucide-react';
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3000");
 
 interface AdminPanelProps {
   onLogout: () => void;
@@ -215,6 +218,22 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
       <span className={selectedSubject ? "text-primary font-bold" : ""}>{selectedSubject?.name || (selectedSection ? "Select Subject" : "")}</span>
     </div>
   );
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Connected to WebSocket server");
+    });
+
+    socket.on("update", (data) => {
+      console.log("Received update:", data);
+      // Handle the update, e.g., refresh data
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("update");
+    };
+  }, []);
 
   if (!isAuthenticated) {
     return (
