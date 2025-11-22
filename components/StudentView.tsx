@@ -37,10 +37,10 @@ const NoteCard = ({ note }: { note: Note }) => {
         <button className="flex-1 bg-primary text-white text-sm py-2 rounded flex items-center justify-center gap-2 hover:bg-teal-800">
            <ExternalLink className="w-4 h-4" /> View
         </button>
-        {note.type === 'pdf' && (
-          <button className="px-3 border border-gray-300 rounded hover:bg-gray-50">
+        {note.type === 'pdf' && note.url && (
+          <a href={note.url} download className="px-3 border border-gray-300 rounded hover:bg-gray-50">
             <Download className="w-4 h-4 text-gray-600" />
-          </button>
+          </a>
         )}
       </div>
     </div>
@@ -109,8 +109,7 @@ export const StudentView: React.FC<StudentViewProps> = ({ onExit }) => {
       tMap[u.id] = ts;
       
       for (const t of ts) {
-        const ns = await dataService.getNotes(t.id);
-        nMap[t.id] = ns;
+        nMap[t.id] = await dataService.getNotes(t.id);
       }
     }
     setTopicsMap(tMap);
@@ -288,7 +287,7 @@ export const StudentView: React.FC<StudentViewProps> = ({ onExit }) => {
                               {/* Notes Grid */}
                               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {(notesMap[topic.id] || []).map(note => (
-                                  <NoteCard key={note.id} note={note} />
+                                  <NoteCard note={note} />
                                 ))}
                                 {(notesMap[topic.id] || []).length === 0 && (
                                   <p className="text-sm text-gray-400 italic col-span-full">No notes uploaded yet.</p>
