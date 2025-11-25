@@ -1,0 +1,5 @@
+{
+  "name": "UniNote Manager",
+  "description": "A comprehensive student notes management system with admin hierarchy controls and student access via USN.",
+  "requestFramePermissions": []
+}
