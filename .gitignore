@@ -44,3 +44,6 @@ yarn-error.log*
 .vercel
 
 >>>>>>> 2269a98efa93291e9c7a0df51eac2f843fc0a902
+
+# Project exclude paths
+/index.js
