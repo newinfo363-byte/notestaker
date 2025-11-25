@@ -1,5 +1,10 @@
 {
+<<<<<<< HEAD
   "name": "UniNote Manager",
   "description": "A comprehensive student notes management system with admin hierarchy controls and student access via USN.",
+=======
+  "name": "NotesFlow - Academic Resource Manager",
+  "description": "A comprehensive, hierarchical note management system for educational institutions. Features a secure admin panel for content management and a simplified, login-free student viewer.",
+>>>>>>> 2269a98efa93291e9c7a0df51eac2f843fc0a902
   "requestFramePermissions": []
 }
